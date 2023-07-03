@@ -3,6 +3,7 @@ import StripeCheckout from "react-stripe-checkout";
 import Axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Topbar from "../modal/topbar"
 
 export default function Dashboard() {
   const [selectedPizzas, setSelectedPizzas] = useState([]);
@@ -86,12 +87,12 @@ export default function Dashboard() {
 
   return (
     <>
+      <Topbar />
       <ToastContainer />
-
       <div className="container">
         <div className="row">
           <div className="col-lg-6">
-            <h2>Pizza Menu</h2>
+            <div className="white-heading">Pizza Menu</div>
             <div className="list-group">
               {pizzaData.map((pizza) => (
                 <div className="list-group-item" key={pizza.id}>
@@ -109,7 +110,7 @@ export default function Dashboard() {
           </div>
 
           <div className="col-lg-6">
-            <h2>Selected Pizzas</h2>
+            <div className="white-heading">Selected Pizzas</div>
             {selectedPizzas.map((pizza) => (
               <div className="card mb-3" key={pizza.id}>
                 <div className="card-body">
