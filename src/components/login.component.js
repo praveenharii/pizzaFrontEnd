@@ -6,7 +6,7 @@ import Topbar from "../modal/welcomePageTopbar"
 export default function Login()  {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [mfaToken, setMFACode] = useState("");
+  // const [mfaToken, setMFACode] = useState("");
   const [showOTPField, setShowOTPField] = useState(false);
   const [otp, setOTP] = useState("");
   const hash = localStorage.getItem("HASH");
@@ -15,7 +15,7 @@ export default function Login()  {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3001/login", { email, password, mfaToken })
+      .post("http://localhost:3001/login", { email, password, hash, otp })
       .then((response) => {
         console.log(response.data);
 
@@ -65,19 +65,19 @@ export default function Login()  {
       });
   };
 
-    const verifyOTP = (e) => {
-      e.preventDefault();
-      console.log(hash);
-      axios
-        .post("http://localhost:3001/verify-otp", { otp, hash, email })
-        .then((response) => {
-          console.log(response.data);
+    // const verifyOTP = (e) => {
+    //   e.preventDefault();
+    //   console.log(hash);
+    //   axios
+    //     .post("http://localhost:3001/verify-otp", { otp, hash, email })
+    //     .then((response) => {
+    //       console.log(response.data);
           
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // };
 
     return (
       <>
@@ -109,7 +109,7 @@ export default function Login()  {
                     placeholder="Enter OTP"
                     onChange={(e) => setOTP(e.target.value)}
                   />
-                  <button onClick={verifyOTP}>Verify OTP</button>
+                 
                 </div>
                 
               )}
@@ -122,7 +122,7 @@ export default function Login()  {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <div className="mb-3">
+              {/* <div className="mb-3">
                 <label>Enter MFA code</label>
                 <input
                   type="password"
@@ -130,7 +130,7 @@ export default function Login()  {
                   placeholder="Enter Code"
                   onChange={(e) => setMFACode(e.target.value)}
                 />
-              </div>
+              </div> */}
               <div className="mb-3">
                 <div className="custom-control custom-checkbox">
                   <input

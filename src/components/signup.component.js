@@ -33,7 +33,7 @@ export default function SignUp() {
       .post("http://localhost:3001/signup", {
         email,
         password,
-        mfaEnabled: true,
+        mfaEnabled: false,
       })
       .then((response) => {
         console.log(response.data);
