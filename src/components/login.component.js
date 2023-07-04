@@ -7,6 +7,9 @@ export default function Login()  {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mfaToken, setMFACode] = useState("");
+  const [showOTPField, setShowOTPField] = useState(false);
+  const [otp, setOTP] = useState("");
+  const hash = localStorage.getItem("HASH");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,9 +45,43 @@ export default function Login()  {
       });
   };
 
+
+  const verifyEmail = (e) => {
+    e.preventDefault();
+
+    axios
+      .post("http://localhost:3001/get-otp", { email })
+      .then((response) => {
+        const { data } = response.data;
+        console.log(response.data);
+        if(response.data.message==="Success"){
+          console.log(response.data.data);
+          localStorage.setItem("HASH", data);
+          setShowOTPField(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+    const verifyOTP = (e) => {
+      e.preventDefault();
+      console.log(hash);
+      axios
+        .post("http://localhost:3001/verify-otp", { otp, hash, email })
+        .then((response) => {
+          console.log(response.data);
+          
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
     return (
       <>
-      <Topbar/> 
+        <Topbar />
         <div className="auth-wrapper">
           <div className="auth-inner">
             <form onSubmit={handleSubmit}>
@@ -58,6 +95,24 @@ export default function Login()  {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
+              <div className="d-grid">
+                <button onClick={verifyEmail} className="btn btn-primary">
+                  Send Email
+                </button>
+              </div>
+              {showOTPField && (
+                <div className="mb-3">
+                  <label>Enter OTP</label>
+                  <input
+                    type="otp"
+                    className="form-control"
+                    placeholder="Enter OTP"
+                    onChange={(e) => setOTP(e.target.value)}
+                  />
+                  <button onClick={verifyOTP}>Verify OTP</button>
+                </div>
+                
+              )}
               <div className="mb-3">
                 <label>Password</label>
                 <input
