@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useState } from "react";
 import axios from "axios"
@@ -11,6 +12,8 @@ export default function Login()  {
   const [showOTPField, setShowOTPField] = useState(false);
   const [otp, setOTP] = useState("");
   const hash = localStorage.getItem("HASH");
+
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -83,6 +86,7 @@ export default function Login()  {
     return (
       <>
         <Topbar />
+
         <div className="auth-wrapper">
           <div className="auth-inner">
             <form onSubmit={handleSubmit}>
@@ -96,13 +100,13 @@ export default function Login()  {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <div className="d-grid">
+              <div className="d-grid row justify-content-md-center">
                 <button onClick={verifyEmail} className="btn btn-primary">
-                  Send Email
+                  Send OTP
                 </button>
               </div>
               {showOTPField && (
-                <div className="mb-3">
+                <div className="mb-3 ">
                   <label>Enter OTP</label>
                   <input
                     type="otp"
@@ -110,9 +114,7 @@ export default function Login()  {
                     placeholder="Enter OTP"
                     onChange={(e) => setOTP(e.target.value)}
                   />
-                 
                 </div>
-                
               )}
               <div className="mb-3">
                 <label>Password</label>
@@ -123,15 +125,7 @@ export default function Login()  {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              {/* <div className="mb-3">
-                <label>Enter MFA code</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  placeholder="Enter Code"
-                  onChange={(e) => setMFACode(e.target.value)}
-                />
-              </div> */}
+
               <div className="mb-3">
                 <div className="custom-control custom-checkbox">
                   <input
@@ -147,7 +141,7 @@ export default function Login()  {
                   </label>
                 </div>
               </div>
-              <div className="d-grid">
+              <div className="d-grid row justify-content-md-center">
                 <button type="submit" className="btn btn-primary">
                   Submit
                 </button>
@@ -162,3 +156,17 @@ export default function Login()  {
     );
   
 }
+
+
+    
+//       /* <div className="mb-3">
+//                 <label>Enter MFA code</label>
+//                 <input
+//                   type="password"
+//                   className="form-control"
+//                   placeholder="Enter Code"
+//                   onChange={(e) => setMFACode(e.target.value)}
+//                 />
+//               </div> */
+    
+

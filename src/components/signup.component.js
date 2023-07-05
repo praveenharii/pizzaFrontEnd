@@ -4,6 +4,7 @@ import axios from "axios";
 import QRCode from "qrcode.react";
 import Topbar from "../modal/welcomePageTopbar"
 import env from "react-dotenv";
+import Form from "react-bootstrap/Form";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -53,7 +54,7 @@ export default function SignUp() {
 
   return (
     <>
-    <Topbar/>
+      <Topbar />
       <div className="auth-wrapper">
         <div className="auth-inner">
           <form onSubmit={handleSubmit}>
@@ -86,7 +87,12 @@ export default function SignUp() {
                 placeholder="Confirm password"
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
+              <Form.Text id="passwordHelpBlock" muted>
+                Your Password must contain at least 1 uppercase, 1 lowercase, 1
+                digit, 1 special character, and be at least 8 characters long.
+              </Form.Text>
             </div>
+
             {showQrCode && mfaSecret && (
               <div className="center-content">
                 <QRCode value={mfaSecret} />
