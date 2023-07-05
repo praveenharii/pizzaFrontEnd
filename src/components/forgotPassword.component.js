@@ -3,6 +3,7 @@
 import React from "react";
 import { useState } from "react";
 import Axios from "axios";
+import env from "react-dotenv";
 
 export default function ResetPassword() {
   const [email, setEmail] = useState("");
@@ -11,13 +12,13 @@ export default function ResetPassword() {
 
   const handleSubmit = (e) => {
    e.preventDefault();
-    Axios.post("http://localhost:3001/forgotPassword", { email })
-    .then((response) => {
-       setMessage(response.data);
-     })
-     .catch((error) => {
+    Axios.post(`${env.APP_API_PORT}/forgotPassword`, { email })
+      .then((response) => {
+        setMessage(response.data);
+      })
+      .catch((error) => {
         setMessage("Error");
-     });
+      });
   };
 
   return (

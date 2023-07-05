@@ -4,6 +4,7 @@ import Axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Topbar from "../modal/topbar"
+import env from "react-dotenv";
 
 export default function Dashboard() {
   const [selectedPizzas, setSelectedPizzas] = useState([]);
@@ -49,7 +50,7 @@ export default function Dashboard() {
  async function handleToken(token, adresses) {
    try {
      const response = await Axios.post(
-       "http://localhost:3001/checkout",
+       `${env.APP_API_PORT}/checkout`,
        {
          token,
          product,

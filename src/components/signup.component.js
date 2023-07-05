@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import QRCode from "qrcode.react";
 import Topbar from "../modal/welcomePageTopbar"
+import env from "react-dotenv";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -30,7 +31,7 @@ export default function SignUp() {
     }
 
     axios
-      .post("http://localhost:3001/signup", {
+      .post(`${env.APP_API_PORT}/signup`, {
         email,
         password,
         mfaEnabled: false,

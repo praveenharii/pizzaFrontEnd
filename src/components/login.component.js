@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios"
 import Topbar from "../modal/welcomePageTopbar"
+import env from "react-dotenv";
 
 export default function Login()  {
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ export default function Login()  {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3001/login", { email, password, hash, otp })
+      .post(`${env.APP_API_PORT}/login`, { email, password, hash, otp })
       .then((response) => {
         console.log(response.data);
 
@@ -37,7 +38,7 @@ export default function Login()  {
           alert("Error signing in: " + data.message);
         } else if (error.request) {
           console.log(error.request);
-          alert("No response received from the server");
+          alert("Please Verify your email");
         } else {
           console.log("Error", error.message);
           alert("Error signing in: " + error.message);
