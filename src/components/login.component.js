@@ -51,11 +51,11 @@ export default function Login()  {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3001/get-otp", { email })
+      .post(`${env.APP_API_PORT}/get-otp`, { email })
       .then((response) => {
         const { data } = response.data;
         console.log(response.data);
-        if(response.data.message==="Success"){
+        if (response.data.message === "Success") {
           console.log(response.data.data);
           localStorage.setItem("HASH", data);
           setShowOTPField(true);
