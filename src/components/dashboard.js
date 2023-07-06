@@ -89,12 +89,12 @@ export default function Dashboard() {
       price: 28,
       image: Image6,
     },
-    {
-      id: 7,
-      name: "Side Chick",
-      price: 200,
-      image: Image7,
-    },
+    // {
+    //   id: 7,
+    //   name: "Side Chick",
+    //   price: 200,
+    //   image: Image7,
+    // },
     // Add more pizza data here
   ];
 
